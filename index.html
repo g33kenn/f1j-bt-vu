@@ -15,57 +15,122 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles to enhance the design */
+        /* CSS Variables for theming */
+        :root {
+            --bg-color: #f8fafc;
+            --main-bg-color: #ffffff;
+            --text-color: #374151;
+            --title-color: #1e40af;
+            --job-title-color: #1f2937;
+            --company-name-color: #4b5563;
+            /* Restored tag colors for light mode */
+            --tag-bg-color: #eef2ff; /* Light Indigo */
+            --tag-text-color: #374151; /* Dark Gray */
+            --border-color: #dbeafe;
+            --timeline-dot-color: #2563eb;
+            --icon-color: #4b5563;
+            --education-bg-color: #f9fafb;
+        }
+
+        body.dark {
+            --bg-color: #111827;
+            --main-bg-color: #1f2937;
+            --text-color: #d1d5db;
+            --title-color: #60a5fa;
+            --job-title-color: #f9fafb;
+            --company-name-color: #9ca3af;
+            /* Kept dark mode tag colors */
+            --tag-bg-color: #1e3a8a; /* Darker Blue for contrast */
+            --tag-text-color: #dbeafe; /* Light Blue */
+            --border-color: #374151;
+            --timeline-dot-color: #60a5fa;
+            --icon-color: #9ca3af;
+            --education-bg-color: #374151;
+        }
+
+        /* General styles using variables */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* A light gray background */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
         .container {
             max-width: 1200px;
+        }
+        main {
+            background-color: var(--main-bg-color);
+            transition: background-color 0.3s;
         }
         h1, h2, h3 {
             font-weight: 700;
         }
         .section-title {
-            color: #1e40af; /* A deep blue for titles */
-            border-bottom: 2px solid #dbeafe; /* A light blue underline */
+            color: var(--title-color);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 8px;
             margin-bottom: 24px;
+            transition: color 0.3s, border-color 0.3s;
         }
         .job-title {
-            color: #1f2937; /* Dark gray for job titles */
+            color: var(--job-title-color);
         }
         .company-name {
-            color: #4b5563; /* Medium gray for company names */
+            color: var(--company-name-color);
         }
         .tag {
-            background-color: #e0e7ff; /* Light blue background for tags */
-            color: #3730a3; /* Dark blue text for tags */
+            background-color: var(--tag-bg-color);
+            color: var(--tag-text-color);
             padding: 4px 12px;
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .timeline-border {
+             border-color: var(--border-color);
+        }
+        .timeline-dot {
+            background-color: var(--timeline-dot-color);
+        }
+        .contact-info a, .contact-info span {
+            color: var(--icon-color);
+        }
+        .education-item {
+             background-color: var(--education-bg-color);
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body>
 
     <div class="container mx-auto p-4 sm:p-8">
-        <main class="bg-white shadow-lg rounded-lg p-6 sm:p-10">
+        <!-- Top bar for switchers -->
+        <div class="flex justify-between items-center mb-4">
+            <!-- Theme Switcher -->
+            <button id="theme-switcher" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-300 flex items-center gap-2">
+                <i class="fas fa-moon"></i>
+            </button>
+            <!-- Language Switcher -->
+            <button id="lang-switcher" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2">
+                <i class="fas fa-language"></i> English
+            </button>
+        </div>
+
+        <main class="shadow-lg rounded-lg p-6 sm:p-10">
             <!-- Header Section -->
-            <header class="text-center mb-10 border-b pb-8">
-                <h1 class="text-4xl md:text-5xl font-bold text-blue-900">Elvin RAHAMEFY</h1>
-                <p class="text-xl md:text-2xl text-gray-600 mt-2">Spécialiste en Gestion des Identités et Accès (GIA)</p>
+            <header class="text-center mb-10 border-b pb-8 timeline-border">
+                <h1 class="text-4xl md:text-5xl font-bold" style="color: var(--title-color);">Elvin RAHAMEFY</h1>
+                <p id="job-main-title" class="text-xl md:text-2xl mt-2" style="color: var(--company-name-color);">Spécialiste en Gestion des Identités et Accès (GIA)</p>
                 
                 <!-- Contact Information -->
-                <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-6 text-gray-600">
-                    <a href="mailto:elvin.rahamefy@gmail.com" class="hover:text-blue-700 transition duration-300">
+                <div class="contact-info flex flex-wrap justify-center gap-x-6 gap-y-2 mt-6">
+                    <a href="mailto:elvin.rahamefy@gmail.com" class="hover:text-blue-500 transition duration-300">
                         <i class="fas fa-envelope mr-2"></i>elvin.rahamefy@gmail.com
                     </a>
                     <span class="flex items-center">
                         <i class="fas fa-map-marker-alt mr-2"></i>Toronto, ON
                     </span>
-                    <a href="https://www.linkedin.com/in/elvin-rahamefy/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-700 transition duration-300">
+                    <a href="https://www.linkedin.com/in/elvin-rahamefy/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-500 transition duration-300">
                         <i class="fab fa-linkedin mr-2"></i>LinkedIn
                     </a>
                 </div>
@@ -73,8 +138,8 @@
 
             <!-- Summary Section -->
             <section class="mb-10">
-                 <h2 class="text-2xl font-bold section-title"><i class="fas fa-user-tie mr-3"></i>EN RÉSUMÉ</h2>
-                 <p class="text-gray-700 leading-relaxed">
+                 <h2 id="summary-title" class="text-2xl font-bold section-title"><i class="fas fa-user-tie mr-3"></i>EN RÉSUMÉ</h2>
+                 <p id="summary-text" class="leading-relaxed">
                     Je suis curieux de nature, et passionné par les infrastructures TI. J'aime comprendre ce que j'entreprends, et suis en recherche constante d'optimisation et de conformité aux bonnes pratiques de sécurité. Mon parcours de 17 ans en informatique me permet d'avoir une vision holistique, qui tient compte du volet technologique sans pour autant négliger les réalités opérationnelles et économiques.
                  </p>
             </section>
@@ -86,17 +151,17 @@
                 <div class="lg:col-span-2">
                     <!-- Professional Experience -->
                     <section class="mb-10">
-                        <h2 class="text-2xl font-bold section-title"><i class="fas fa-briefcase mr-3"></i>EXPÉRIENCE PROFESSIONNELLE</h2>
+                        <h2 id="experience-title" class="text-2xl font-bold section-title"><i class="fas fa-briefcase mr-3"></i>EXPÉRIENCE PROFESSIONNELLE</h2>
                         
-                        <div class="relative border-l-2 border-blue-200 pl-8 space-y-12">
+                        <div class="relative border-l-2 timeline-border pl-8 space-y-12">
                             <!-- Jolera - Current Position -->
                             <div class="relative">
-                                <div class="absolute -left-[42px] top-1 h-4 w-4 bg-blue-600 rounded-full"></div>
-                                <p class="text-sm text-gray-500">Depuis juin 2023 (position actuelle)</p>
-                                <h3 class="text-xl font-semibold job-title">Architecte de Solutions bilingue</h3>
+                                <div class="absolute -left-[42px] top-1 h-4 w-4 rounded-full timeline-dot"></div>
+                                <p id="exp1-date" class="text-sm" style="color: var(--company-name-color);">Depuis juin 2023 (position actuelle)</p>
+                                <h3 id="exp1-title" class="text-xl font-semibold job-title">Architecte de Solutions bilingue</h3>
                                 <p class="company-name">Jolera</p>
-                                <p class="italic text-gray-600 my-2">"Traduire les problèmes et besoin des clients en solutions TI"</p>
-                                <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+                                <p id="exp1-desc" class="italic my-2" style="color: var(--company-name-color);">"Traduire les problèmes et besoin des clients en solutions TI"</p>
+                                <ul id="exp1-tasks" class="list-disc list-inside space-y-1 mt-2">
                                     <li>Présentation clients (tous niveaux hiérarchiques)</li>
                                     <li>Conception de solutions TI sur mesures</li>
                                     <li>Activité internes (Soutien, Formation)</li>
@@ -106,11 +171,11 @@
 
                             <!-- Jolera - Previous Position -->
                             <div class="relative">
-                                <div class="absolute -left-[42px] top-1 h-4 w-4 bg-blue-600 rounded-full"></div>
-                                <p class="text-sm text-gray-500">Juillet 2019 - Juin 2023 (4 ans)</p>
-                                <h3 class="text-xl font-semibold job-title">Spécialiste Cloud Microsoft bilingue</h3>
+                                <div class="absolute -left-[42px] top-1 h-4 w-4 rounded-full timeline-dot"></div>
+                                <p id="exp2-date" class="text-sm" style="color: var(--company-name-color);">Juillet 2019 - Juin 2023 (4 ans)</p>
+                                <h3 id="exp2-title" class="text-xl font-semibold job-title">Spécialiste Cloud Microsoft bilingue</h3>
                                 <p class="company-name">Jolera</p>
-                                <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+                                <ul id="exp2-tasks" class="list-disc list-inside space-y-1 mt-2">
                                     <li>Expert métier sur PowerShell et écosystèmes Microsoft 365/Azure</li>
                                     <li>Implémentation de Entra Privileged Identity Management (PIM) et Azure Disaster Recovery (ASR)</li>
                                     <li>Création de scripts PowerShell d'automatisation pour diverses tâches</li>
@@ -122,11 +187,11 @@
 
                             <!-- devoteam -->
                             <div class="relative">
-                                <div class="absolute -left-[42px] top-1 h-4 w-4 bg-blue-600 rounded-full"></div>
-                                <p class="text-sm text-gray-500">Avril 2014 - Mars 2019 (5 ans)</p>
-                                <h3 class="text-xl font-semibold job-title">Spécialiste TI Bilingue</h3>
+                                <div class="absolute -left-[42px] top-1 h-4 w-4 rounded-full timeline-dot"></div>
+                                <p id="exp3-date" class="text-sm" style="color: var(--company-name-color);">Avril 2014 - Mars 2019 (5 ans)</p>
+                                <h3 id="exp3-title" class="text-xl font-semibold job-title">Spécialiste TI Bilingue</h3>
                                 <p class="company-name">Devoteam</p>
-                                <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+                                <ul id="exp3-tasks" class="list-disc list-inside space-y-1 mt-2">
                                     <li>Conception et mise en place d'un flux de travail pour validation de qualité</li>
                                     <li>Mise en place et maintien d'une infrastructure de déploiement (MDT, VMWare)</li>
                                     <li>Création de scripts PowerShell d'automatisation (Audit, Migration)</li>
@@ -139,21 +204,21 @@
 
                     <!-- Education & Training -->
                     <section>
-                        <h2 class="text-2xl font-bold section-title"><i class="fas fa-graduation-cap mr-3"></i>ÉDUCATION ET FORMATION</h2>
+                        <h2 id="education-title" class="text-2xl font-bold section-title"><i class="fas fa-graduation-cap mr-3"></i>ÉDUCATION ET FORMATION</h2>
                         <div class="space-y-4">
-                             <div class="p-4 bg-gray-50 rounded-lg">
-                                <p class="font-semibold">MCSE Microsoft Cloud Platform Infrastructure <span class="text-gray-500 font-normal ml-2">(2017)</span></p>
+                             <div class="p-4 rounded-lg education-item">
+                                <p class="font-semibold">MCSE Microsoft Cloud Platform Infrastructure <span class="font-normal ml-2" style="color: var(--company-name-color);">(2017)</span></p>
                             </div>
-                             <div class="p-4 bg-gray-50 rounded-lg">
-                                <p class="font-semibold">MCSA Microsoft Windows Server <span class="text-gray-500 font-normal ml-2">(2013)</span></p>
+                             <div class="p-4 rounded-lg education-item">
+                                <p class="font-semibold">MCSA Microsoft Windows Server <span class="font-normal ml-2" style="color: var(--company-name-color);">(2013)</span></p>
                             </div>
-                             <div class="p-4 bg-gray-50 rounded-lg">
-                                <p class="font-semibold">MCTS Microsoft Windows <span class="text-gray-500 font-normal ml-2">(2007)</span></p>
+                             <div class="p-4 rounded-lg education-item">
+                                <p class="font-semibold">MCTS Microsoft Windows <span class="font-normal ml-2" style="color: var(--company-name-color);">(2007)</span></p>
                             </div>
-                             <div class="p-4 bg-gray-50 rounded-lg">
-                                <p class="font-semibold">Diplôme Universitaire (2 ans) en Technologie de l'Information <span class="text-gray-500 font-normal ml-2">(2004)</span></p>
+                             <div id="education-uni" class="p-4 rounded-lg education-item">
+                                <p class="font-semibold">Diplôme Universitaire (2 ans) en Technologie de l'Information <span class="font-normal ml-2" style="color: var(--company-name-color);">(2004)</span></p>
                             </div>
-                             <div class="p-4 bg-gray-50 rounded-lg">
+                             <div id="education-bac" class="p-4 rounded-lg education-item">
                                 <p class="font-semibold">Baccalauréat Français</p>
                             </div>
                         </div>
@@ -164,48 +229,48 @@
                 <div class="lg:col-span-1 space-y-10">
                     <!-- Strengths -->
                     <section>
-                        <h2 class="text-2xl font-bold section-title"><i class="fas fa-star mr-3"></i>POINTS FORTS</h2>
-                        <ul class="list-none space-y-3">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-blue-600 mr-3"></i>Solide compréhension de l'informatique d'entreprise</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-blue-600 mr-3"></i>Esprit d'équipe</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-blue-600 mr-3"></i>Rapidité d'apprentissage et d'adaptation</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-blue-600 mr-3"></i>Esprit d'analyse et de résolution de problèmes</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-blue-600 mr-3"></i>Communication et documentation bilingue</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-blue-600 mr-3"></i>Automatisation</li>
+                        <h2 id="strengths-title" class="text-2xl font-bold section-title"><i class="fas fa-star mr-3"></i>POINTS FORTS</h2>
+                        <ul id="strengths-list" class="list-none space-y-3">
+                            <li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Solide compréhension de l'informatique d'entreprise</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Esprit d'équipe</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Rapidité d'apprentissage et d'adaptation</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Esprit d'analyse et de résolution de problèmes</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Communication et documentation bilingue</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Automatisation</li>
                         </ul>
                     </section>
 
                     <!-- Skills -->
                     <section>
-                        <h2 class="text-2xl font-bold section-title"><i class="fas fa-cogs mr-3"></i>COMPÉTENCES</h2>
+                        <h2 id="skills-title" class="text-2xl font-bold section-title"><i class="fas fa-cogs mr-3"></i>COMPÉTENCES</h2>
                         <div class="space-y-6">
                             <div>
-                                <h3 class="font-semibold text-lg mb-2 text-gray-700">Identité / Sécurité</h3>
-                                <div class="flex flex-wrap gap-2">
+                                <h3 id="skill1-title" class="font-semibold text-lg mb-2 job-title">Identité / Sécurité</h3>
+                                <div id="skill1-tags" class="flex flex-wrap gap-2">
                                     <span class="tag">Microsoft Entra PIM</span><span class="tag">MFA</span><span class="tag">Conditional Access</span><span class="tag">SSO</span><span class="tag">Entra ID/Active Directory</span><span class="tag">Notions de SAML</span>
                                 </div>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-lg mb-2 text-gray-700">Scripting</h3>
-                                <div class="flex flex-wrap gap-2">
+                                <h3 id="skill2-title" class="font-semibold text-lg mb-2 job-title">Scripting</h3>
+                                <div id="skill2-tags" class="flex flex-wrap gap-2">
                                     <span class="tag">PowerShell</span><span class="tag">MS Graph REST API</span><span class="tag">Formules Excel/VBScript</span><span class="tag">SQL</span>
                                 </div>
                             </div>
                              <div>
-                                <h3 class="font-semibold text-lg mb-2 text-gray-700">Cybersécurité</h3>
-                                <div class="flex flex-wrap gap-2">
+                                <h3 id="skill3-title" class="font-semibold text-lg mb-2 job-title">Cybersécurité</h3>
+                                <div id="skill3-tags" class="flex flex-wrap gap-2">
                                     <span class="tag">Intégration SIEM</span><span class="tag">Solutions MDR, VDR, EDR</span>
                                 </div>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-lg mb-2 text-gray-700">Communication</h3>
-                                <div class="flex flex-wrap gap-2">
+                                <h3 id="skill4-title" class="font-semibold text-lg mb-2 job-title">Communication</h3>
+                                <div id="skill4-tags" class="flex flex-wrap gap-2">
                                     <span class="tag">Français (Langue maternelle)</span><span class="tag">Anglais (CEFR C1)</span><span class="tag">Présentations clients</span><span class="tag">Formation d'utilisateurs</span><span class="tag">Traductions</span>
                                 </div>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-lg mb-2 text-gray-700">Documentation</h3>
-                                <div class="flex flex-wrap gap-2">
+                                <h3 id="skill5-title" class="font-semibold text-lg mb-2 job-title">Documentation</h3>
+                                <div id="skill5-tags" class="flex flex-wrap gap-2">
                                     <span class="tag">Cahier des charges</span><span class="tag">Rapport d'analyse</span><span class="tag">Proposition budgétaire</span><span class="tag">Procédures utilisateurs</span><span class="tag">Appel d'offres</span>
                                 </div>
                             </div>
@@ -215,6 +280,141 @@
             </div>
         </main>
     </div>
+
+<script>
+    // --- TRANSLATION LOGIC ---
+    const translations = {
+        fr: {
+            pageTitle: "CV - Elvin RAHAMEFY",
+            jobMainTitle: "Spécialiste en Gestion des Identités et Accès (GIA)",
+            summaryTitle: '<i class="fas fa-user-tie mr-3"></i>EN RÉSUMÉ',
+            summaryText: "Je suis curieux de nature, et passionné par les infrastructures TI. J'aime comprendre ce que j'entreprends, et suis en recherche constante d'optimisation et de conformité aux bonnes pratiques de sécurité. Mon parcours de 17 ans en informatique me permet d'avoir une vision holistique, qui tient compte du volet technologique sans pour autant négliger les réalités opérationnelles et économiques.",
+            experienceTitle: '<i class="fas fa-briefcase mr-3"></i>EXPÉRIENCE PROFESSIONNELLE',
+            exp1_date: "Depuis juin 2023 (position actuelle)",
+            exp1_title: "Architecte de Solutions bilingue",
+            exp1_desc: '"Traduire les problèmes et besoin des clients en solutions TI"',
+            exp1_tasks: `<li>Présentation clients (tous niveaux hiérarchiques)</li><li>Conception de solutions TI sur mesures</li><li>Activité internes (Soutien, Formation)</li><li>Rédaction d'offres TI, propositions budgétaires, cahiers des charges et réponses aux appels d'offres</li>`,
+            exp2_date: "Juillet 2019 - Juin 2023 (4 ans)",
+            exp2_title: "Spécialiste Cloud Microsoft bilingue",
+            exp2_tasks: `<li>Expert métier sur PowerShell et écosystèmes Microsoft 365/Azure</li><li>Implémentation de Entra Privileged Identity Management (PIM) et Azure Disaster Recovery (ASR)</li><li>Création de scripts PowerShell d'automatisation pour diverses tâches</li><li>Évaluation de la sécurité et des privilèges de Microsoft 365</li><li>Extraction de données pour intégration (Brightgauge)</li><li>Communication technique avec les clients et formation des collaborateurs</li>`,
+            exp3_date: "Avril 2014 - Mars 2019 (5 ans)",
+            exp3_title: "Spécialiste TI Bilingue",
+            exp3_tasks: `<li>Conception et mise en place d'un flux de travail pour validation de qualité</li><li>Mise en place et maintien d'une infrastructure de déploiement (MDT, VMWare)</li><li>Création de scripts PowerShell d'automatisation (Audit, Migration)</li><li>Soutien informatique de 3ème niveau</li><li>Formation de collaborateurs et documentation technique</li>`,
+            educationTitle: '<i class="fas fa-graduation-cap mr-3"></i>ÉDUCATION ET FORMATION',
+            educationUni: '<p class="font-semibold">Diplôme Universitaire (2 ans) en Technologie de l\'Information <span class="font-normal ml-2" style="color: var(--company-name-color);">(2004)</span></p>',
+            educationBac: '<p class="font-semibold">Baccalauréat Français</p>',
+            strengthsTitle: '<i class="fas fa-star mr-3"></i>POINTS FORTS',
+            strengthsList: `<li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Solide compréhension de l'informatique d'entreprise</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Esprit d'équipe</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Rapidité d'apprentissage et d'adaptation</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Esprit d'analyse et de résolution de problèmes</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Communication et documentation bilingue</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Automatisation</li>`,
+            skillsTitle: '<i class="fas fa-cogs mr-3"></i>COMPÉTENCES',
+            skill1_title: "Identité / Sécurité",
+            skill1_tags: `<span class="tag">Microsoft Entra PIM</span><span class="tag">MFA</span><span class="tag">Conditional Access</span><span class="tag">SSO</span><span class="tag">Entra ID/Active Directory</span><span class="tag">Notions de SAML</span>`,
+            skill2_title: "Scripting",
+            skill2_tags: `<span class="tag">PowerShell</span><span class="tag">MS Graph REST API</span><span class="tag">Formules Excel/VBScript</span><span class="tag">SQL</span>`,
+            skill3_title: "Cybersécurité",
+            skill3_tags: `<span class="tag">Intégration SIEM</span><span class="tag">Solutions MDR, VDR, EDR</span>`,
+            skill4_title: "Communication",
+            skill4_tags: `<span class="tag">Français (Langue maternelle)</span><span class="tag">Anglais (CEFR C1)</span><span class="tag">Présentations clients</span><span class="tag">Formation d'utilisateurs</span><span class="tag">Traductions</span>`,
+            skill5_title: "Documentation",
+            skill5_tags: `<span class="tag">Cahier des charges</span><span class="tag">Rapport d'analyse</span><span class="tag">Proposition budgétaire</span><span class="tag">Procédures utilisateurs</span><span class="tag">Appel d'offres</span>`,
+            switcherText: "English"
+        },
+        en: {
+            pageTitle: "Resume - Elvin RAHAMEFY",
+            jobMainTitle: "Identity and Access Management (IAM) Specialist",
+            summaryTitle: '<i class="fas fa-user-tie mr-3"></i>SUMMARY',
+            summaryText: "I am naturally curious and passionate about IT infrastructures. I like to understand what I undertake, and I am constantly seeking optimization and compliance with security best practices. My 17 years of experience in IT allow me to have a holistic vision, which takes into account the technological aspect without neglecting operational and economic realities.",
+            experienceTitle: '<i class="fas fa-briefcase mr-3"></i>PROFESSIONAL EXPERIENCE',
+            exp1_date: "Since June 2023 (current position)",
+            exp1_title: "Bilingual Solutions Architect",
+            exp1_desc: '"Translating client problems and needs into IT solutions"',
+            exp1_tasks: `<li>Client presentations (all hierarchical levels)</li><li>Design of custom IT solutions</li><li>Internal activities (Support, Training)</li><li>Drafting of IT offers, budget proposals, statements of work, and responses to calls for tenders</li>`,
+            exp2_date: "July 2019 - June 2023 (4 years)",
+            exp2_title: "Bilingual Microsoft Cloud Specialist",
+            exp2_tasks: `<li>Subject matter expert on PowerShell and Microsoft 365/Azure ecosystems</li><li>Implementation of Entra Privileged Identity Management (PIM) and Azure Disaster Recovery (ASR)</li><li>Creation of PowerShell automation scripts for various tasks</li><li>Assessment of Microsoft 365 security and privileges</li><li>Data extraction for integration (Brightgauge)</li><li>Technical communication with clients and training of colleagues</li>`,
+            exp3_date: "April 2014 - March 2019 (5 years)",
+            exp3_title: "Bilingual IT Specialist",
+            exp3_tasks: `<li>Design and implementation of a quality validation workflow</li><li>Setup and maintenance of a deployment infrastructure (MDT, VMWare)</li><li>Creation of PowerShell automation scripts (Audit, Migration)</li><li>Level 3 IT support</li><li>Training of colleagues and technical documentation</li>`,
+            educationTitle: '<i class="fas fa-graduation-cap mr-3"></i>EDUCATION AND TRAINING',
+            educationUni: '<p class="font-semibold">University Diploma (2 years) in Information Technology <span class="font-normal ml-2" style="color: var(--company-name-color);">(2004)</span></p>',
+            educationBac: '<p class="font-semibold">French Baccalaureate</p>',
+            strengthsTitle: '<i class="fas fa-star mr-3"></i>STRENGTHS',
+            strengthsList: `<li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Solid understanding of corporate IT</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Team spirit</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Quick learning and adaptation</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Analytical and problem-solving skills</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Bilingual communication and documentation</li><li class="flex items-center"><i class="fas fa-check-circle mr-3" style="color: var(--timeline-dot-color);"></i>Automation</li>`,
+            skillsTitle: '<i class="fas fa-cogs mr-3"></i>SKILLS',
+            skill1_title: "Identity / Security",
+            skill1_tags: `<span class="tag">Microsoft Entra PIM</span><span class="tag">MFA</span><span class="tag">Conditional Access</span><span class="tag">SSO</span><span class="tag">Entra ID/Active Directory</span><span class="tag">SAML Concepts</span>`,
+            skill2_title: "Scripting",
+            skill2_tags: `<span class="tag">PowerShell</span><span class="tag">MS Graph REST API</span><span class="tag">Excel Formulas/VBScript</span><span class="tag">SQL</span>`,
+            skill3_title: "Cybersecurity",
+            skill3_tags: `<span class="tag">SIEM Integration</span><span class="tag">MDR, VDR, EDR Solutions</span>`,
+            skill4_title: "Communication",
+            skill4_tags: `<span class="tag">French (Native)</span><span class="tag">English (CEFR C1)</span><span class="tag">Client Presentations</span><span class="tag">User Training</span><span class="tag">Translations</span>`,
+            skill5_title: "Documentation",
+            skill5_tags: `<span class="tag">Statement of Work</span><span class="tag">Analysis Report</span><span class="tag">Budget Proposal</span><span class="tag">User Procedures</span><span class="tag">Request for Proposal</span>`,
+            switcherText: "Français"
+        }
+    };
+
+    // --- THEME SWITCHER LOGIC ---
+    const themeSwitcher = document.getElementById('theme-switcher');
+    themeSwitcher.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        const isDarkMode = document.body.classList.contains('dark');
+        themeSwitcher.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+
+    // --- LANGUAGE SWITCHER LOGIC ---
+    const langSwitcher = document.getElementById('lang-switcher');
+    let currentLang = 'fr';
+
+    langSwitcher.addEventListener('click', () => {
+        // Toggle language
+        currentLang = currentLang === 'fr' ? 'en' : 'fr';
+        
+        // Update all text elements
+        document.documentElement.lang = currentLang;
+        document.title = translations[currentLang].pageTitle;
+        document.getElementById('job-main-title').textContent = translations[currentLang].jobMainTitle;
+        document.getElementById('summary-title').innerHTML = translations[currentLang].summaryTitle;
+        document.getElementById('summary-text').textContent = translations[currentLang].summaryText;
+        document.getElementById('experience-title').innerHTML = translations[currentLang].experienceTitle;
+        
+        document.getElementById('exp1-date').textContent = translations[currentLang].exp1_date;
+        document.getElementById('exp1-title').textContent = translations[currentLang].exp1_title;
+        document.getElementById('exp1-desc').textContent = translations[currentLang].exp1_desc;
+        document.getElementById('exp1-tasks').innerHTML = translations[currentLang].exp1_tasks;
+
+        document.getElementById('exp2-date').textContent = translations[currentLang].exp2_date;
+        document.getElementById('exp2-title').textContent = translations[currentLang].exp2_title;
+        document.getElementById('exp2-tasks').innerHTML = translations[currentLang].exp2_tasks;
+
+        document.getElementById('exp3-date').textContent = translations[currentLang].exp3_date;
+        document.getElementById('exp3-title').textContent = translations[currentLang].exp3_title;
+        document.getElementById('exp3-tasks').innerHTML = translations[currentLang].exp3_tasks;
+        
+        document.getElementById('education-title').innerHTML = translations[currentLang].educationTitle;
+        document.getElementById('education-uni').innerHTML = translations[currentLang].educationUni;
+        document.getElementById('education-bac').innerHTML = translations[currentLang].educationBac;
+
+        document.getElementById('strengths-title').innerHTML = translations[currentLang].strengthsTitle;
+        document.getElementById('strengths-list').innerHTML = translations[currentLang].strengthsList;
+
+        document.getElementById('skills-title').innerHTML = translations[currentLang].skillsTitle;
+        document.getElementById('skill1-title').textContent = translations[currentLang].skill1_title;
+        document.getElementById('skill1-tags').innerHTML = translations[currentLang].skill1_tags;
+        document.getElementById('skill2-title').textContent = translations[currentLang].skill2_title;
+        document.getElementById('skill2-tags').innerHTML = translations[currentLang].skill2_tags;
+        document.getElementById('skill3-title').textContent = translations[currentLang].skill3_title;
+        document.getElementById('skill3-tags').innerHTML = translations[currentLang].skill3_tags;
+        document.getElementById('skill4-title').textContent = translations[currentLang].skill4_title;
+        document.getElementById('skill4-tags').innerHTML = translations[currentLang].skill4_tags;
+        document.getElementById('skill5-title').textContent = translations[currentLang].skill5_title;
+        document.getElementById('skill5-tags').innerHTML = translations[currentLang].skill5_tags;
+
+        // Update button text
+        langSwitcher.innerHTML = `<i class="fas fa-language"></i> ${translations[currentLang].switcherText}`;
+    });
+
+</script>
 
 </body>
 </html>
